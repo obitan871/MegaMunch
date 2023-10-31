@@ -104,9 +104,10 @@ header nav ul li a:hover {
 
 .header-search {
   grid-area: search;
+  position: relative;
   display: flex;
   align-items: center;
-  position: relative;
+  padding-top: 6px;
 }
 
 .header-search input {
@@ -115,6 +116,9 @@ header nav ul li a:hover {
   position: relative;
   background: url("../img/search.png") no-repeat right;
   background-size: 28px;
+  font-size: 1rem;
+  padding-top: 3px;
+  padding-left: 10px;
 }
 
 .header-user-menu {
@@ -127,16 +131,25 @@ header nav ul li a:hover {
   grid-template-columns: repeat(3, 80px);
   grid-gap: 20px;
   list-style: none;
+  height: 100%;
   width: 100%;
-  margin-bottom: 0;
+  margin: 0;
   padding: 0;
 }
 
 .header-user-menu ul li {
   position: relative;
   display: flex;
-  align-items: flex-end;
-  text-align: center;
+  align-items: end;
+}
+
+.header-user-menu ul li::before {
+  content: '';
+  position: absolute;
+  border-left: 1px solid black;
+  bottom: 3px;
+  left: -20px;
+  height: 40%;
 }
 
 .header-user-menu ul li a {
@@ -147,22 +160,25 @@ header nav ul li a:hover {
 .header-user-menu ul li a:hover {
   color: rgb(32, 130, 241);
 }
-    
-.header-user-menu ul li::before {
-  content: '';
+
+.header-user-menu ul li span {
   position: absolute;
-  border-left: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background: red;
+  font-size: 0.9rem;
+  border-radius: 50%;
   top: 50%;
-  left: -20px;
-  height: 50%;
+  left: 16px;
+  height: 18px;
+  width: 18px;
+  z-index: 1;
 }
 
 .header-user-menu ul li:first-child::before {
   display: none;
-}
-
-.header-user-menu ul li a {
-  text-decoration: none;
 }
 
 .header-user-menu ul li .signin::before,
@@ -172,6 +188,7 @@ header nav ul li a:hover {
   font-family: "Material Symbols Outlined";
   font-variation-settings: 'FILL' 0;
   font-size: 30px;
+  text-align: center;
 }
     
 .header-user-menu ul li .signin::before {
@@ -190,208 +207,6 @@ main {
   background: rgb(231, 231, 231);
 }
 
-.carousel {
-  position: relative;
-  height: 620px;
-  margin: 0 auto;
-}
-
-.carousel-track-container {
-  position: relative;
-  height: 100%;
-  overflow: hidden;
-}
-
-.carousel-track {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  height: 100%;
-  transition: transform 200ms ease-in;
-}
-
-.carousel:hover :where(.carousel-btn, .carousel-nav) {
-  opacity: 1;
-}
-
-.carousel-slide {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-}
-
-.carousel-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.carousel-btn {
-  position: absolute;
-  opacity: 0;
-  top: 50%;
-  width: 100px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  border: 0;
-  padding: 0;
-  background: transparent;
-  transition: 0.8s;
-}
-
-.carousel-btn:hover {
-  background: rgb(219, 232, 236, .6);
-}
-
-.carousel-btn--left {
-  left: 0;
-  z-index: 9;
-}
-
-.carousel-btn--right {
-  right: 0;
-  z-index: 9;
-}
-
-svg {
-  width: 100px;
-  transform: scale(0.5);
-  transition: 0.4s;
-}
-
-svg:hover {
-  transform: scale(0.7);
-}
-
-.carousel-nav {
-  position: absolute;
-  bottom: 0;
-  opacity: 0;
-  background: rgb(219, 232, 236, .3);;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 10px 0;
-  transition: 0.8s;
-}
-
-.carousel-indicator {
-  border: 0;
-  border-radius: 50%;
-  width: 15px;
-  height: 15px;
-  background: rgba(0, 0, 0, .3);
-  margin: 0 12px;
-  cursor: pointer;
-}
-
-.carousel-current-slide {
-  background: rgba(0, 0, 0, .75);
-}
-
-.shop-by-category {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  background: white;
-  padding-top: 1.5rem;
-  padding-bottom: 2rem;
-  margin: 1rem 1rem 2rem;
-}
-
-.shop-by-category h1 {
-  margin-top: 1rem;
-  margin-bottom: 3rem;
-}
-
-.categories {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 220px);
-  column-gap: 4em;
-  row-gap: 3em;
-  place-content: center;
-  padding-left: 1em;
-  padding-right: 1em;
-  margin-bottom: 50px;
-}
-
-.cat-fruits, .cat-vegetables, .cat-dairyeggs, .cat-meatseafood, .cat-breadbakery, .cat-beverage, .cat-snacks {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.cat-fruits a,
-.cat-vegetables a,
-.cat-dairyeggs a,
-.cat-meatseafood a,
-.cat-breadbakery a,
-.cat-beverage a,
-.cat-snacks a {
-  color: crimson;
-  text-decoration: none;
-  font-size: larger;
-  font-weight: bold;
-  z-index: 9;
-}
-
-.cat-fruits::before,
-.cat-vegetables::before,
-.cat-dairyeggs::before,
-.cat-meatseafood::before,
-.cat-breadbakery::before,
-.cat-beverage::before,
-.cat-snacks::before {
-  display: block;
-  content: '';
-  height: 220px;
-  width: 220px;
-  background: rgb(231, 231, 231);
-  background-size: 100% 100%;
-  border-radius: 50%;
-  transition: 0.5s;
-}
-
-.cat-fruits:hover::before,
-.cat-vegetables:hover::before,
-.cat-dairyeggs:hover::before,
-.cat-meatseafood:hover::before,
-.cat-breadbakery:hover::before,
-.cat-beverage:hover::before,
-.cat-snacks:hover::before {
-  transform: scale(1.1);
-}
-
-.cat-fruits::before {
-  background-image: url('../img/fruits.png');
-}
-
-.cat-vegetables::before {
-  background-image: url('../img/vegetables.png');
-}
-
-.cat-dairyeggs::before {
-  background-image: url('../img/dairyeggs.png');
-}
-
-.cat-meatseafood::before {
-  background-image: url('../img/meatseafood.png');
-}
-
-.cat-breadbakery::before {
-  background-image: url('../img/breadbakery.png');
-}
-
-.cat-beverage::before {
-  background-image: url('../img/beverage.png');
-}
-
-.cat-snacks::before {
-  background-image: url('../img/snacks.png');
-}
 
 .support-info {
   background: rgba(75, 131, 216, 0.8);
@@ -430,13 +245,15 @@ svg:hover {
 }
 
 footer {
-  margin-top: 1.5rem;
+  margin: 1.5rem auto;
   text-align: center;
 }
 
+
+
 @media screen and (min-width: 900px) {
   header {
-    grid-template-columns: minmax(200px, 25%) 1fr 1fr 1fr;
+    grid-template-columns: minmax(240px, 25%) 1fr 1fr 1fr;
     grid-template-areas:
       "logo search search useritems"
       "nav nav nav nav"
@@ -467,19 +284,34 @@ footer {
     display: none;
   }
   
+  .header-user-menu {
+    padding-top: 6px;
+  }
+
   .header-user-menu ul {
     grid-template-columns: repeat(3, 110px);
-    margin-bottom: 18px;
+    margin: 0;
     padding-left: 0;
   }
   
+  .header-user-menu ul li {
+    align-items: center;
+  }
+
   .header-user-menu ul li::before {
     content: '';
     position: absolute;
     border-left: 1px solid black;
-    top: 32%;
+    top: 50%;
+    transform: translateY(-50%);
     left: -20px;
-    height: 60%;
+    height: 40%;
+  }
+
+  .header-user-menu ul li span {
+    top: 0;
+    transform: translateY(100%);
+    left: 12px;
   }
 
   .header-user-menu ul li .signin::before,

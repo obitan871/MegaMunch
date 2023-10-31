@@ -1,0 +1,127 @@
+.cart-tab {
+  position: fixed;
+  display: grid;
+  grid-template-rows: 75px 1fr 100px;
+
+  width: 400px;
+  inset: 0 -400px 0 auto;
+  background: rgb(245 252 255);
+  border-left: 1px solid lightgrey;
+  transition: 0.5s;
+
+  z-index: 9;
+}
+
+body.show-cart-tab .cart-tab {
+  inset: 0 0 0 auto;
+}
+
+.cart-tab a {
+  display: contents;
+  text-decoration: none;
+}
+
+.cart-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-bottom: 1px solid lightgrey;
+  background: rgb(197, 216, 245);
+}
+
+.cart-title h3::before {
+  content: '\e8cc';
+  font-family: "Material Symbols Outlined";
+  font-size: 30px;
+  font-weight: 400;
+  vertical-align: -20%;
+  margin-right: 1rem;
+}
+
+.cart-items {
+  overflow: auto;
+}
+
+.cart-items::-webkit-scrollbar {
+  width: 0;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 100px 60px 80px 1fr 20px;
+  grid-template-rows: 1fr 1fr;
+  width: 95%;
+  height: 108px;
+  border-top: 1px solid lightgrey;
+  margin: 10px auto;
+  align-items: center;
+  column-gap: 10px;
+  padding: 8px 12px 0 6px;
+}
+
+.cart-item:first-child {
+  border: none;
+}
+
+.cart-item .cart-item-img {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  width: 100px;
+  height: 100px;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  background: white;
+  object-fit: cover;
+}
+
+.cart-item .cart-item-name {
+  grid-column: 2 / span 3;
+  grid-row: 1;
+}
+
+.cart-item .cart-item-price {
+  grid-column: 2;
+  grid-row: 2;
+  color: red;
+}
+
+.cart-item .cart-item-price::before {
+  content: '$';
+}
+
+.cart-item .cart-item-quantity {
+  grid-column: 3;
+  grid-row: 2;
+  justify-self: center;
+}
+
+.cart-item .cart-item-delete {
+  grid-column: 5;
+  grid-row: 1;
+  display: flex;
+  justify-content: center;
+  align-self: end;
+}
+
+.cart-checkout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-checkout-btn {
+  background: rgb(150 136 237);
+  color: white;
+  height: 56px;
+  width: 85%;
+  font-size: 17px;
+  cursor: pointer;
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+
+.cart-checkout-btn:hover {
+  background: rgb(160 149 231);
+}

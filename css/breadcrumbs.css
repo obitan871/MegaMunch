@@ -1,0 +1,19 @@
+.breadcrumbs {
+  height: 2.5rem;
+  margin-left: 3em;
+}
+
+.breadcrumbs ul {
+  display: flex;
+  padding: 0;
+  gap: 1.3rem;
+}
+
+.breadcrumbs ul li {
+  float: left;
+  list-style-type: ' > ';
+}
+
+.breadcrumbs ul li:first-child {
+  list-style-type: none;
+}

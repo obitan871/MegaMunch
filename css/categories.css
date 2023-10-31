@@ -1,0 +1,101 @@
+.shop-by-category {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background: white;
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+  margin: 1rem 1rem 2rem;
+}
+
+.shop-by-category h1 {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 220px);
+  column-gap: 4em;
+  row-gap: 3em;
+  place-content: center;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-bottom: 50px;
+}
+
+.cat-fruits, .cat-vegetables, .cat-dairyeggs, .cat-meatseafood, .cat-breadbakery, .cat-beverage, .cat-snacks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cat-fruits a,
+.cat-vegetables a,
+.cat-dairyeggs a,
+.cat-meatseafood a,
+.cat-breadbakery a,
+.cat-beverage a,
+.cat-snacks a {
+  color: crimson;
+  text-decoration: none;
+  font-size: larger;
+  font-weight: bold;
+  z-index: 9;
+}
+
+.cat-fruits::before,
+.cat-vegetables::before,
+.cat-dairyeggs::before,
+.cat-meatseafood::before,
+.cat-breadbakery::before,
+.cat-beverage::before,
+.cat-snacks::before {
+  display: block;
+  content: '';
+  height: 220px;
+  width: 220px;
+  background: rgb(231, 231, 231);
+  background-size: 100% 100%;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+
+.cat-fruits:hover::before,
+.cat-vegetables:hover::before,
+.cat-dairyeggs:hover::before,
+.cat-meatseafood:hover::before,
+.cat-breadbakery:hover::before,
+.cat-beverage:hover::before,
+.cat-snacks:hover::before {
+  transform: scale(1.1);
+}
+
+.cat-fruits::before {
+  background-image: url('../img/fruits.png');
+}
+
+.cat-vegetables::before {
+  background-image: url('../img/vegetables.png');
+}
+
+.cat-dairyeggs::before {
+  background-image: url('../img/dairyeggs.png');
+}
+
+.cat-meatseafood::before {
+  background-image: url('../img/meatseafood.png');
+}
+
+.cat-breadbakery::before {
+  background-image: url('../img/breadbakery.png');
+}
+
+.cat-beverage::before {
+  background-image: url('../img/beverage.png');
+}
+
+.cat-snacks::before {
+  background-image: url('../img/snacks.png');
+}

@@ -1,0 +1,101 @@
+.carousel {
+  position: relative;
+  height: 620px;
+  margin: 0 auto;
+}
+
+.carousel-track-container {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.carousel-track {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: 100%;
+  transition: transform 200ms ease-in;
+}
+
+.carousel:hover :where(.carousel-btn, .carousel-nav) {
+  opacity: 1;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-btn {
+  position: absolute;
+  opacity: 0;
+  top: 50%;
+  width: 100px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  border: 0;
+  border-radius: 10px;
+  padding: 0;
+  background: transparent;
+  transition: 0.8s;
+}
+
+.carousel-btn:hover {
+  background: rgb(219, 232, 236, .6);
+}
+
+.carousel-btn--left {
+  left: 0;
+  z-index: 9;
+}
+
+.carousel-btn--right {
+  right: 0;
+  z-index: 9;
+}
+
+svg {
+  width: 100px;
+  transform: scale(0.5);
+  transition: 0.4s;
+}
+
+svg:hover {
+  transform: scale(0.7);
+}
+
+.carousel-nav {
+  position: absolute;
+  bottom: 0;
+  opacity: 0;
+  background: rgb(219, 232, 236, .3);;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  transition: 0.8s;
+}
+
+.carousel-indicator {
+  border: 0;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  background: rgba(0, 0, 0, .3);
+  margin: 0 12px;
+  cursor: pointer;
+}
+
+.carousel-current-slide {
+  background: rgba(0, 0, 0, .75);
+}
