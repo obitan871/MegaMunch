@@ -45,7 +45,7 @@
         <ul>
           <li><a href="#" class="signin">Sign In</a></li>
           <li><a href="#" class="orders">Orders</a></li>
-          <li><span>0</span><a href="#" class="cart">Cart</a></li>
+          <li><span id="cart-amount">0</span><a href="#" class="cart">Cart</a></li>
         </ul>
       </div>
     </header>
@@ -62,20 +62,20 @@
         </ul>
       </nav>
 
-      <div class="product">
+      <div class="product" data-id="10017">
         <div class="product-img">
           <img src="img/product/c837a6_b5b9284a44384c8dbce0bc27bad2dda4~mv2.png">
         </div>
         <div class="product-name">
           <h2>Avocados - 1 lb</h2>
-          <p>PID: 00033</p>
+          <p>PID: 10017</p>
         </div>
         <div class="product-price">2.99</div>
         <div class="product-quantity">
           <p>Quantity</p>
           <input class="product-quantity-input" type="number" value="1" />
-          <button class="product-addtocart-btn">Add to Cart</button>
         </div>
+        <button class="product-addtocart-btn">Add to Cart</button>
         <div class="product-info">
           <h3>Product Information</h3>
           <p>I&rsquo;m a product detail. I&rsquo;m a great place to add more information about your product such as

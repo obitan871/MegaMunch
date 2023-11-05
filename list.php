@@ -45,7 +45,7 @@
         <ul>
           <li><a href="#" class="signin">Sign In</a></li>
           <li><a href="#" class="orders">Orders</a></li>
-          <li><span>0</span><a href="#" class="cart">Cart</a></li>
+          <li><span id="cart-amount">0</span><a href="#" class="cart">Cart</a></li>
         </ul>
       </div>
     </header>
@@ -63,7 +63,7 @@
       </nav>
 
       <div class="items">
-        <div class="item">
+        <div class="item" data-id="10010">
           <a href="#"><img src="img/product/c837a6_11d76874bf4f4964b3d89b3fde8b03d4~mv2.png" alt=""
               class="item-img"></a>
           <div class="item-name">Baguette - 12 oz.</div>
@@ -73,7 +73,7 @@
           </div>
           <button class="item-addtocart-btn">Add to Cart</button>
         </div>
-        <div class="item">
+        <div class="item" data-id="10011">
           <a href="#"><img src="img/product/c837a6_36d41200f4b64ce9ae3217477852d196~mv2.png" alt=""
               class="item-img"></a>
           <div class="item-name">Chocolate Cookies - 4 ct.</div>
@@ -83,7 +83,7 @@
           </div>
           <button class="item-addtocart-btn">Add to Cart</button>
         </div>
-        <div class="item">
+        <div class="item" data-id="10012">
           <a href="#"><img src="img/product/c837a6_425b5fac1bc5421eb1308140de5f20db~mv2.png" alt=""
               class="item-img"></a>
           <div class="item-name">Carrots - 1 lb</div>
@@ -93,7 +93,7 @@
           </div>
           <button class="item-addtocart-btn">Add to Cart</button>
         </div>
-        <div class="item">
+        <div class="item" data-id="10013">
           <a href="#"><img src="img/product/c837a6_4cb5c7b10bf34549861bc763c08ecddd~mv2.png" alt=""
               class="item-img"></a>
           <div class="item-name">Croissants - 4 ct.</div>
@@ -103,7 +103,7 @@
           </div>
           <button class="item-addtocart-btn">Add to Cart</button>
         </div>
-        <div class="item">
+        <div class="item" data-id="10014">
           <a href="#"><img src="img/product/c837a6_4da77aa2a0d64d599c150d9d023a931a~mv2.png" alt=""
               class="item-img"></a>
           <div class="item-name">Cucumber - 1 lb</div>
@@ -113,7 +113,7 @@
           </div>
           <button class="item-addtocart-btn">Add to Cart</button>
         </div>
-        <div class="item">
+        <div class="item" data-id="10015">
           <a href="#"><img src="img/product/c837a6_7326ce5047ce43be94fa9c7963950913~mv2.png" alt=""
               class="item-img"></a>
           <div class="item-name">Red Bell Pepper - 1 lb</div>
@@ -123,7 +123,7 @@
           </div>
           <button class="item-addtocart-btn">Add to Cart</button>
         </div>
-        <div class="item">
+        <div class="item" data-id="10016">
           <a href="#"><img src="img/product/c837a6_7d0cb61ce3f64c9092c5e58e6270bb90~mv2.png" alt=""
               class="item-img"></a>
           <div class="item-name">Banana Chocolate Chip Cake</div>
@@ -133,7 +133,7 @@
           </div>
           <button class="item-addtocart-btn">Add to Cart</button>
         </div>
-        <div class="item">
+        <div class="item" data-id="10017">
           <a href="#"><img src="img/product/c837a6_b5b9284a44384c8dbce0bc27bad2dda4~mv2.png" alt=""
               class="item-img"></a>
           <div class="item-name">Avocados - 1 lb</div>

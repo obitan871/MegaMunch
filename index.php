@@ -45,7 +45,7 @@
         <ul>
           <li><a href="#" class="signin">Sign In</a></li>
           <li><a href="#" class="orders">Orders</a></li>
-          <li><span>2</span><a href="#" class="cart">Cart</a></li>
+          <li><span id="cart-amount">0</span><a href="#" class="cart">Cart</a></li>
         </ul>
       </div>
     </header>
@@ -144,7 +144,7 @@
   <?php
     include "cart.php";
   ?>
-  
+
   <svg>
     <symbol id="next" viewBox="0 0 256 512">
       <path fill="white"

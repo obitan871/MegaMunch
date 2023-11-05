@@ -97,12 +97,30 @@ body.show-cart-tab .cart-tab {
   justify-self: center;
 }
 
+.cart-item .cart-item-quantity .cart-item-quantity-num {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+.cart-item .cart-item-quantity .cart-item-quantity-minus,
+.cart-item .cart-item-quantity .cart-item-quantity-add {
+  user-select: none;
+  cursor: pointer;
+}
+
 .cart-item .cart-item-delete {
   grid-column: 5;
   grid-row: 1;
   display: flex;
   justify-content: center;
   align-self: end;
+  cursor: pointer;
+}
+
+.cart-item .cart-item-delete:hover {
+  color: lightcoral;
 }
 
 .cart-checkout {
