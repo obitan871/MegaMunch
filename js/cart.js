@@ -21,7 +21,7 @@ const cartItems = document.querySelector('.cart-items');
 
 // Function to add a product item to the shopping cart
 const addToCart = (id, image, name, price, quantity) => {
-
+  
   // Update cart icon at the header menu
   const cartAmt = document.getElementById('cart-amount');
   // Update the cart amount by adding the quantity of the newly added item
@@ -64,10 +64,22 @@ const addToCart = (id, image, name, price, quantity) => {
     let quantityNum = newItem.querySelector('.cart-item-quantity-num');
     num = Number(quantityNum.innerText);
     if (num > 1) {
-      // Decrease the quantity and update the cart amount
+      // Decrease the quantity
       num--;
+
+      // update the cart data
+      cartData.forEach((e) => {
+        if (e.id == id) {
+          e.quantity = num;
+          return;
+        }
+      });
+      localStorage.setItem("cartData", JSON.stringify(cartData));
+      
+      // update the shopping cart in the sidebar
       quantityNum.innerText = num;
 
+      // update the cart amount
       cartAmt.innerText = Number(cartAmt.innerText) - 1;
     }
   });
@@ -78,10 +90,22 @@ const addToCart = (id, image, name, price, quantity) => {
     let quantityNum = newItem.querySelector('.cart-item-quantity-num');
     num = Number(quantityNum.innerText);
 
-    // Increase the quantity and update the cart amount
+    // Increase the quantity
     num++;
+
+    // update the cart data
+    cartData.forEach((e) => {
+      if (e.id == id) {
+        e.quantity = num;
+        return;
+      }
+    });
+    localStorage.setItem("cartData", JSON.stringify(cartData));
+
+    // update the shopping cart in the sidebar
     quantityNum.innerText = num;
 
+    // update the cart amount
     cartAmt.innerText = Number(cartAmt.innerText) + 1;
   });
 
@@ -91,8 +115,16 @@ const addToCart = (id, image, name, price, quantity) => {
     let quantityNum = newItem.querySelector('.cart-item-quantity-num');
     num = Number(quantityNum.innerText)
 
-    // Decrease the cart amount and remove the item from the cart
+    // update the cart data
+    let idx = cartData.findIndex(e => e.id == id);
+    cartData.splice(idx, 1);
+
+    localStorage.setItem("cartData", JSON.stringify(cartData));
+
+    // decrease the cart amount
     cartAmt.innerText = Number(cartAmt.innerText) - num;
+
+    // remove the item from the cart
     cartItems.removeChild(newItem);
   });
 };
@@ -115,11 +147,41 @@ if (itemAddToCartBtns !== null) {
       let price = Number(props[2].innerText);
       let quantity = Number(props[3].children[0].value);
 
+      // Update cart data
+      let newlyAdded = true;
+      cartData.forEach((e) => {
+        // if there is already an item in the cart data array, only update the quantity
+        if (e.id == id) {
+          e.quantity += quantity;
+          newlyAdded = false;
+          return;
+        }
+      });
+
+      if (newlyAdded == true) {
+        cartData.push({"id": id, "image": image, "name": name, "price": price, "quantity": quantity});
+      }
+
+      localStorage.setItem("cartData", JSON.stringify(cartData));
+
       // Call the 'addToCart' function to add the item to the cart
       addToCart(id, image, name, price, quantity);
     })
   }
 }
+
+// Initialize the shopping cart
+localStorage = window.localStorage;
+var cartData = JSON.parse(localStorage.getItem("cartData"));
+
+if (cartData != null) {
+  cartData.forEach((e) => {
+    addToCart(e.id, e.image, e.name, e.price, e.quantity);
+  });
+} else {
+  cartData = [];
+}
+
 
 // Retrieve the 'add to cart' button element in product page
 const productAddToCartBtn = document.querySelector('.product-addtocart-btn');
@@ -136,6 +198,23 @@ if (productAddToCartBtn !== null) {
     let price = Number(props[2].innerText);
     let quantity = Number(props[3].children[1].value);
 
+    // Update cart data
+    let newlyAdded = true;
+    cartData.forEach((e) => {
+      // if there is already an item in the cart data array, only update the quantity
+      if (e.id == id) {
+        e.quantity += quantity;
+        newlyAdded = false;
+        return;
+      }
+    });
+
+    if (newlyAdded == true) {
+      cartData.push({"id": id, "image": image, "name": name, "price": price, "quantity": quantity});
+    }
+
+    localStorage.setItem("cartData", JSON.stringify(cartData));
+    
     // Call the 'addToCart' function to add the item to the cart
     addToCart(id, image, name, price, quantity);
   })

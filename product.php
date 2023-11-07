@@ -1,3 +1,18 @@
+<?php
+  require_once "dbconfig.php";
+
+  $pid = null;
+  if (isset($_GET["id"])) {
+    $pid = $_GET["id"];
+  }
+
+  $sql = "SELECT p.name, p.image, p.price, p.description, c.id, c.name ".
+    "FROM Product p ".
+    "INNER JOIN ProductCategory pc ".
+    "INNER JOIN Category c ".
+    "WHERE p.id = pc.pid AND pc.cid = c.id AND p.id = ?";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,58 +34,51 @@
   <div class="container">
 
     <!-- Header section -->
-    <header>
-      <h1 class="header-logo">MegaMunch</h1>
-
-      <input type="checkbox" id="header-nav-toggle" class="header-nav-toggle">
-      <nav>
-        <ul>
-          <li><a href="#">Shop All</a></li>
-          <li><a href="#">Fruit</a></li>
-          <li><a href="#">Vegetables</a></li>
-          <li><a href="#">Dairy & eggs</a></li>
-          <li><a href="#">Meat & Seafood</a></li>
-          <li><a href="#">Bread & bakery</a></li>
-          <li><a href="#">Beverage</a></li>
-          <li><a href="#">Snacks</a></li>
-        </ul>
-      </nav>
-      <label for="header-nav-toggle" class="header-nav-toggle-label"><span></span></label>
-
-      <div class="header-search">
-        <input type="text" placeholder="Search...">
-      </div>
-
-      <div class="header-user-menu">
-        <ul>
-          <li><a href="#" class="signin">Sign In</a></li>
-          <li><a href="#" class="orders">Orders</a></li>
-          <li><span id="cart-amount">0</span><a href="#" class="cart">Cart</a></li>
-        </ul>
-      </div>
-    </header>
+    <?php include "header.php"; ?>
 
     <!-- Main section -->
     <main style="background: white;">
+      <?php
+        if ($stmt = mysqli_prepare($conn, $sql)) {
+          // Bind product id to prepare statement
+          mysqli_stmt_bind_param($stmt, "i", $param_pid);
+
+          $param_pid = $pid;
+
+          // Execute the prepared statement
+          if (mysqli_stmt_execute($stmt)) {
+
+            // Store result
+            mysqli_stmt_store_result($stmt);
+            
+            if (mysqli_stmt_num_rows($stmt) == 1) {
+              // Bind result to variables
+              mysqli_stmt_bind_result($stmt, $name, $image, $price, $desc, $cid, $cname);
+
+              mysqli_stmt_fetch($stmt);
+            }
+          }
+        }
+      ?>
 
       <p>&nbsp;</p>
       <nav class="breadcrumbs">
         <ul>
           <li><a href="./index.php">Home</a></li>
-          <li><a href="./list.php?Category=Fruit">Fruit</a></li>
-          <li>Avocados - 1 lb</li>
+          <li><a href="./list.php?id=<?php echo $cid ?>"><?php echo $cname ?></a></li>
+          <li><?php echo $name ?></li>
         </ul>
       </nav>
 
-      <div class="product" data-id="10017">
+      <div class="product" data-id="<?php echo $pid ?>">
         <div class="product-img">
-          <img src="img/product/c837a6_b5b9284a44384c8dbce0bc27bad2dda4~mv2.png">
+          <img src="<?php echo $image ?>">
         </div>
         <div class="product-name">
-          <h2>Avocados - 1 lb</h2>
-          <p>PID: 10017</p>
+          <h2><?php echo $name ?></h2>
+          <p>PID: <?php echo $pid ?></p>
         </div>
-        <div class="product-price">2.99</div>
+        <div class="product-price"><?php echo $price ?></div>
         <div class="product-quantity">
           <p>Quantity</p>
           <input class="product-quantity-input" type="number" value="1" />
@@ -78,12 +86,7 @@
         <button class="product-addtocart-btn">Add to Cart</button>
         <div class="product-info">
           <h3>Product Information</h3>
-          <p>I&rsquo;m a product detail. I&rsquo;m a great place to add more information about your product such as
-            sizing, material, care and cleaning instructions. This is also a great space to write what makes this
-            product
-            special and how your customers can benefit from this item. Buyers like to know what they’re getting before
-            they purchase, so give them as much information as possible so they can buy with confidence and certainty.
-          </p>
+          <p><?php echo $desc ?></p>
         </div>
         <div class="product-return-policy">
           <h3>Return & Refund Policy</h3>
@@ -93,48 +96,15 @@
         </div>
       </div>
 
-      <div class="support-info">
-        <div class="store-location">
-          <h3>Store Location</h3>
-          <ul>
-            <li>12666 72 Avenue</li>
-            <li>Surrey, BC V3W 2M8</li>
-            <li>info@megamunch.com</li>
-          </ul>
-          <h4>123-456-7890</h4>
-        </div>
-        <div class="customer-support">
-          <h3>Customer Support</h3>
-          <ul>
-            <li>Contact Us</li>
-            <li>Help Center</li>
-            <li>About Us</li>
-            <li>Careers</li>
-          </ul>
-        </div>
-        <div class="policy">
-          <h3>Policy</h3>
-          <ul>
-            <li>Shipping & Returns</li>
-            <li>Terms & Conditions</li>
-            <li>Payment Methods</li>
-            <li>FAQ</li>
-          </ul>
-        </div>
+      <?php include "support.php"; ?>
 
-        <hr />
-      </div>
     </main>
 
     <!-- Footer section -->
     <footer>© 2022 - 2023 MegaMunch Ltd. All Rights Reserved.</footer>
   </div>
 
-  <?php
-    include "cart.php";
-  ?>
+  <?php include "cart.php"; ?>
 
-  <script src="js/cart.js"></script>
 </body>
-
 </html>

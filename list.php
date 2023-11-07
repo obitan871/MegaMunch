@@ -1,3 +1,22 @@
+<?php
+  require_once "dbconfig.php";
+
+  $cid = null;
+  if (isset($_GET["id"])) {
+    $cid = $_GET["id"];
+  }
+
+  $sql = "SELECT p.id, p.name, p.image, p.price, c.name ".
+    "FROM Product p ".
+    "INNER JOIN ProductCategory pc ".
+    "INNER JOIN Category c ".
+    "WHERE p.id = pc.pid AND pc.cid = c.id AND p.quantity > 0";
+  
+  if ($cid != null) {
+    $sql .= " AND pc.cid = ?";
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,175 +38,68 @@
   <div class="container">
 
     <!-- Header section -->
-    <header>
-      <h1 class="header-logo">MegaMunch</h1>
-
-      <input type="checkbox" id="header-nav-toggle" class="header-nav-toggle">
-      <nav>
-        <ul>
-          <li><a href="#">Shop All</a></li>
-          <li><a href="#">Fruit</a></li>
-          <li><a href="#">Vegetables</a></li>
-          <li><a href="#">Dairy & eggs</a></li>
-          <li><a href="#">Meat & Seafood</a></li>
-          <li><a href="#">Bread & bakery</a></li>
-          <li><a href="#">Beverage</a></li>
-          <li><a href="#">Snacks</a></li>
-        </ul>
-      </nav>
-      <label for="header-nav-toggle" class="header-nav-toggle-label"><span></span></label>
-
-      <div class="header-search">
-        <input type="text" placeholder="Search...">
-      </div>
-
-      <div class="header-user-menu">
-        <ul>
-          <li><a href="#" class="signin">Sign In</a></li>
-          <li><a href="#" class="orders">Orders</a></li>
-          <li><span id="cart-amount">0</span><a href="#" class="cart">Cart</a></li>
-        </ul>
-      </div>
-    </header>
+    <?php include 'header.php'; ?>
 
     <!-- Main section -->
     <main style="background: white;">
+      <?php
+        if ($stmt = mysqli_prepare($conn, $sql)) {
+          if ($cid != null) {
+            // Bind category to prepare statement
+            mysqli_stmt_bind_param($stmt, "i", $param_cid);
+      
+            $param_cid = $cid;
+          }
+          
+          // Execute the prepared statement
+          if (mysqli_stmt_execute($stmt)) {
+      
+            // Bind result to variables
+            mysqli_stmt_bind_result($stmt, $id, $name, $image, $price, $cname);
+      
+            mysqli_stmt_fetch($stmt);
+          }
+        }
+      ?>
 
       <p>&nbsp;</p>
       <p>&nbsp;</p>
       <nav class="breadcrumbs">
         <ul>
-          <li><a href="./index.html">Home</a></li>
-          <li>Shop All</li>
+          <li><a href="./index.php">Home</a></li>
+          <li><?php echo ($cid != null) ? $cname : "Shop All"; ?></li>
         </ul>
       </nav>
 
       <div class="items">
-        <div class="item" data-id="10010">
-          <a href="#"><img src="img/product/c837a6_11d76874bf4f4964b3d89b3fde8b03d4~mv2.png" alt=""
-              class="item-img"></a>
-          <div class="item-name">Baguette - 12 oz.</div>
-          <div class="item-price">3.99</div>
-          <div class="item-quantity">
-            <input class="item-quantity-input" type="number" value="1" />
-          </div>
-          <button class="item-addtocart-btn">Add to Cart</button>
-        </div>
-        <div class="item" data-id="10011">
-          <a href="#"><img src="img/product/c837a6_36d41200f4b64ce9ae3217477852d196~mv2.png" alt=""
-              class="item-img"></a>
-          <div class="item-name">Chocolate Cookies - 4 ct.</div>
-          <div class="item-price">5.99</div>
-          <div class="item-quantity">
-            <input class="item-quantity-input" type="number" value="1" />
-          </div>
-          <button class="item-addtocart-btn">Add to Cart</button>
-        </div>
-        <div class="item" data-id="10012">
-          <a href="#"><img src="img/product/c837a6_425b5fac1bc5421eb1308140de5f20db~mv2.png" alt=""
-              class="item-img"></a>
-          <div class="item-name">Carrots - 1 lb</div>
-          <div class="item-price">5.99</div>
-          <div class="item-quantity">
-            <input class="item-quantity-input" type="number" value="1" />
-          </div>
-          <button class="item-addtocart-btn">Add to Cart</button>
-        </div>
-        <div class="item" data-id="10013">
-          <a href="#"><img src="img/product/c837a6_4cb5c7b10bf34549861bc763c08ecddd~mv2.png" alt=""
-              class="item-img"></a>
-          <div class="item-name">Croissants - 4 ct.</div>
-          <div class="item-price">6.99</div>
-          <div class="item-quantity">
-            <input class="item-quantity-input" type="number" value="1" />
-          </div>
-          <button class="item-addtocart-btn">Add to Cart</button>
-        </div>
-        <div class="item" data-id="10014">
-          <a href="#"><img src="img/product/c837a6_4da77aa2a0d64d599c150d9d023a931a~mv2.png" alt=""
-              class="item-img"></a>
-          <div class="item-name">Cucumber - 1 lb</div>
-          <div class="item-price">0.99</div>
-          <div class="item-quantity">
-            <input class="item-quantity-input" type="number" value="1" />
-          </div>
-          <button class="item-addtocart-btn">Add to Cart</button>
-        </div>
-        <div class="item" data-id="10015">
-          <a href="#"><img src="img/product/c837a6_7326ce5047ce43be94fa9c7963950913~mv2.png" alt=""
-              class="item-img"></a>
-          <div class="item-name">Red Bell Pepper - 1 lb</div>
-          <div class="item-price">4.49</div>
-          <div class="item-quantity">
-            <input class="item-quantity-input" type="number" value="1" />
-          </div>
-          <button class="item-addtocart-btn">Add to Cart</button>
-        </div>
-        <div class="item" data-id="10016">
-          <a href="#"><img src="img/product/c837a6_7d0cb61ce3f64c9092c5e58e6270bb90~mv2.png" alt=""
-              class="item-img"></a>
-          <div class="item-name">Banana Chocolate Chip Cake</div>
-          <div class="item-price">5.99</div>
-          <div class="item-quantity">
-            <input class="item-quantity-input" type="number" value="1" />
-          </div>
-          <button class="item-addtocart-btn">Add to Cart</button>
-        </div>
-        <div class="item" data-id="10017">
-          <a href="#"><img src="img/product/c837a6_b5b9284a44384c8dbce0bc27bad2dda4~mv2.png" alt=""
-              class="item-img"></a>
-          <div class="item-name">Avocados - 1 lb</div>
-          <div class="item-price">2.99</div>
-          <div class="item-quantity">
-            <input class="item-quantity-input" type="number" value="1" />
-          </div>
-          <button class="item-addtocart-btn">Add to Cart</button>
-        </div>
+        <?php
+          do {
+            echo "<div class=\"item\" data-id=\"$id\">\r\n".
+                 "  <a href=\"product.php?id=$id\"><img src=\"$image\" class=\"item-img\"></a>\r\n".
+                 "  <div class=\"item-name\">$name</div>\r\n".
+                 "  <div class=\"item-price\">$price</div>\r\n".
+                 "  <div class=\"item-quantity\">\r\n".
+                 "    <input class=\"item-quantity-input\" type=\"number\" value=\"1\" />\r\n".
+                 "  </div>\r\n".
+                 "  <button class=\"item-addtocart-btn\">Add to Cart</button>\r\n".
+                 "</div>\r\n";
+          } while (mysqli_stmt_fetch($stmt));
 
+          mysqli_stmt_close($stmt);
+
+          // Close database connection
+          mysqli_close($conn);
+        ?>
       </div>
 
-      <div class="support-info">
-        <div class="store-location">
-          <h3>Store Location</h3>
-          <ul>
-            <li>12666 72 Avenue</li>
-            <li>Surrey, BC V3W 2M8</li>
-            <li>info@megamunch.com</li>
-          </ul>
-          <h4>123-456-7890</h4>
-        </div>
-        <div class="customer-support">
-          <h3>Customer Support</h3>
-          <ul>
-            <li>Contact Us</li>
-            <li>Help Center</li>
-            <li>About Us</li>
-            <li>Careers</li>
-          </ul>
-        </div>
-        <div class="policy">
-          <h3>Policy</h3>
-          <ul>
-            <li>Shipping & Returns</li>
-            <li>Terms & Conditions</li>
-            <li>Payment Methods</li>
-            <li>FAQ</li>
-          </ul>
-        </div>
-
-        <hr />
-      </div>
+      <?php include "support.php"; ?>
     </main>
 
     <!-- Footer section -->
     <footer>© 2022 - 2023 MegaMunch Ltd. All Rights Reserved.</footer>
   </div>
 
-  <?php
-    include "cart.php";
-  ?>
+  <?php include "cart.php"; ?>
 
-  <script src="js/cart.js"></script>
 </body>
-
 </html>

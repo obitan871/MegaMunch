@@ -9,3 +9,5 @@
     <button class="cart-checkout-btn">Proceed to Checkout</button>
   </div>
 </div>
+
+<script src="js/cart.js"></script>

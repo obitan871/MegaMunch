@@ -17,38 +17,9 @@
 
 <body>
   <div class="container">
-
+    
     <!-- Header section -->
-    <header>
-      <h1 class="header-logo">MegaMunch</h1>
-
-      <input type="checkbox" id="header-nav-toggle" class="header-nav-toggle">
-      <nav>
-        <ul>
-          <li><a href="#">Shop All</a></li>
-          <li><a href="#">Fruit</a></li>
-          <li><a href="#">Vegetables</a></li>
-          <li><a href="#">Dairy & eggs</a></li>
-          <li><a href="#">Meat & Seafood</a></li>
-          <li><a href="#">Bread & bakery</a></li>
-          <li><a href="#">Beverage</a></li>
-          <li><a href="#">Snacks</a></li>
-        </ul>
-      </nav>
-      <label for="header-nav-toggle" class="header-nav-toggle-label"><span></span></label>
-
-      <div class="header-search">
-        <input type="text" placeholder="Search...">
-      </div>
-
-      <div class="header-user-menu">
-        <ul>
-          <li><a href="#" class="signin">Sign In</a></li>
-          <li><a href="#" class="orders">Orders</a></li>
-          <li><span id="cart-amount">0</span><a href="#" class="cart">Cart</a></li>
-        </ul>
-      </div>
-    </header>
+    <?php include 'header.php'; ?>
 
     <!-- Main section -->
     <main>
@@ -94,56 +65,24 @@
       <div class="shop-by-category">
         <h1>Shop by Category</h1>
         <div class="categories">
-          <div class="cat-fruits"><a href="#">Fruits</a></div>
-          <div class="cat-vegetables"><a href="#">Vegetables</a></div>
-          <div class="cat-dairyeggs"><a href="#">Dairy & Eggs</a></div>
-          <div class="cat-meatseafood"><a href="#">Meat & Seafood</a></div>
-          <div class="cat-breadbakery"><a href="#">Bread & Bakery</a></div>
-          <div class="cat-beverage"><a href="#">Beverage</a></div>
-          <div class="cat-snacks"><a href="#">Snacks</a></div>
+          <div class="cat-fruits"><a href="list.php?id=1001">Fruits</a></div>
+          <div class="cat-vegetables"><a href="list.php?id=1002">Vegetables</a></div>
+          <div class="cat-dairyeggs"><a href="list.php?id=1003">Dairy & Eggs</a></div>
+          <div class="cat-meatseafood"><a href="list.php?id=1004">Meat & Seafood</a></div>
+          <div class="cat-breadbakery"><a href="list.php?id=1005">Bread & Bakery</a></div>
+          <div class="cat-beverage"><a href="list.php?id=1006">Beverage</a></div>
+          <div class="cat-snacks"><a href="list.php?id=1007">Snacks</a></div>
         </div>
       </div>
 
-      <div class="support-info">
-        <div class="store-location">
-          <h3>Store Location</h3>
-          <ul>
-            <li>12666 72 Avenue</li>
-            <li>Surrey, BC V3W 2M8</li>
-            <li>info@megamunch.com</li>
-          </ul>
-          <h4>123-456-7890</h4>
-        </div>
-        <div class="customer-support">
-          <h3>Customer Support</h3>
-          <ul>
-            <li>Contact Us</li>
-            <li>Help Center</li>
-            <li>About Us</li>
-            <li>Careers</li>
-          </ul>
-        </div>
-        <div class="policy">
-          <h3>Policy</h3>
-          <ul>
-            <li>Shipping & Returns</li>
-            <li>Terms & Conditions</li>
-            <li>Payment Methods</li>
-            <li>FAQ</li>
-          </ul>
-        </div>
-
-        <hr />
-      </div>
+      <?php include "support.php"; ?>
     </main>
 
     <!-- Footer section -->
     <footer>© 2022 - 2023 MegaMunch Ltd. All Rights Reserved.</footer>
   </div>
 
-  <?php
-    include "cart.php";
-  ?>
+  <?php include "cart.php"; ?>
 
   <svg>
     <symbol id="next" viewBox="0 0 256 512">
@@ -158,7 +97,6 @@
   </svg>
 
   <script src="js/carousel.js"></script>
-  <script src="js/cart.js"></script>
-</body>
 
+</body>
 </html>
