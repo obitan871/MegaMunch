@@ -20,7 +20,8 @@ header {
 .header-logo {
   grid-area: logo;
   margin-left: 0.3em;
-  font-weight: bold;
+  margin-top: 0.7em;
+  height: 6em;
 }
 
 .header-nav-toggle {

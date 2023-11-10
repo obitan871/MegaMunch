@@ -59,24 +59,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <html>
 <head>
-    <title>Sign In | MegaMunch</title>
+    <link rel="icon" href="img/icon.png">
+    <title> Sign In | MegaMunch </title>
+    <link href="css/signin.css" rel="stylesheet" type="text/css">
   </head>
+
   <body>
-    <div class="logo"></div>
-    <p>Sign In</p>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-      <div>
-        <label>User Name:</label>
-        <input type="text" name="username">
-      </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" name="password">
-      </div>
-      <div>
-        <input type="submit" value="Sign In">
-      </div>
-      <p>New to MegaMunch? <a href="./register.php">Sign up now</a></p>
+   
+    <form action= "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"> 
+        
+        <div class="logo">
+            <h1><img class="logo-icon" src="img/icon.png"> MegaMunch Login</h1>
+        </div>
+        
+        <div class="imgcontainer">
+            <img src="img/avatar.png" alt="Avatar" class="avatar">
+        </div>
+     
+         
+        <div class="container">       
+             
+    <label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username" >
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password"> 
+
+    <button type="submit">Login</button>
+      
+     
+    <p>New to MegaMunch? <a href="./register.php"> Register Now </a></p>
+   
+         
+          </div>
+       
+        
     </form>
   </body>
 </html>
