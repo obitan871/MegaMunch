@@ -1,0 +1,133 @@
+.order {
+  display: flex;
+  flex-direction: column;
+
+  width: 80%;
+  margin: 2rem auto;
+}
+
+.order-items-header {
+  display: grid;
+  grid-template-columns: 160px 1fr 120px 150px 120px 30px;
+  width: 100%;
+}
+
+.order-items-header * {
+  border-bottom: 1px solid lightgrey;
+}
+
+.order-item-header-description {
+  grid-column: 1 / span 2;
+}
+
+.order-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-item {
+  display: grid;
+  grid-template-columns: 160px 1fr 120px 150px 120px 30px;
+  border-bottom: 1px solid lightgrey;
+}
+
+.order-item * {
+  display: flex;
+  align-items: center;
+}
+
+.order-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.order-item-price::before,
+.order-item-subtotal::before {
+  content: '$ ';
+}
+
+.order-item-quantity {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.order-item-quantity-minus, .order-item-quantity-add {
+  user-select: none;
+  display: inline-block;
+  width: 20px;
+  text-align: center;
+  cursor: pointer;
+  background: #c0c0c0;
+  border: 1px solid #c0c0c0;
+}
+
+.order-item-quantity-minus:hover,
+.order-item-quantity-add:hover {
+  background: #e0e0e0;
+}
+
+.order-item-quantity-num {
+  justify-content: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.order-item-delete {
+  cursor: pointer;
+  width: 26px;
+}
+
+.order-item-delete:hover {
+  color: lightcoral;
+}
+
+.order-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  border-top: 3px solid lightsalmon;
+}
+
+.order-summary-total-before-tax,
+.order-summary-total-tax,
+.order-summary-total-after-tax {
+  display: flex;
+  width: 200px;
+  justify-content: space-between;
+  margin-bottom:5px;
+}
+
+  /*
+
+  .order-summary-total-before-tax,
+  .order-summary-total-tax,
+  .order-summary-total-after-tax {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 30%;
+    padding-top: 1rem;
+    padding-right: 4rem;
+  }
+
+  .order-summary-pay-this {
+    margin-top: 2rem;
+  }
+
+  .order-summary-pay-this-btn {
+    background: rgb(150 136 237);
+    color: white;
+    height: 36px;
+    width: 200px;
+    font-size: 17px;
+    cursor: pointer;
+    border: 1px solid grey;
+    border-radius: 10px;
+  }
+
+  .order-summary-pay-this-btn:hover {
+    background: rgb(160 149 231);
+  }
+ */

@@ -6,7 +6,7 @@
   <div class="cart-items">
   </div>
   <div class="cart-checkout">
-    <button class="cart-checkout-btn">Proceed to Checkout</button>
+    <button class="cart-checkout-btn" onclick="location.href='order.php';">Proceed to Checkout</button>
   </div>
 </div>
 

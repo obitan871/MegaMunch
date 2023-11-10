@@ -34,8 +34,12 @@ const addToCart = (id, image, name, price, quantity) => {
       let cartItemProps = cartItem.children;
 
       // Update the quantity if the item is already in the cart
-      cartItemProps[3].children[1].innerText =
-        quantity + Number(cartItemProps[3].children[1].innerText);
+      newQuantity = quantity + Number(cartItemProps[3].children[1].innerText);
+      cartItemProps[3].children[1].innerText = newQuantity;
+
+      if (newQuantity == 0) {
+        cartItems.removeChild(cartItem);
+      }
       
       return;  // Exit the function as the item was found in the cart
     }
@@ -113,7 +117,7 @@ const addToCart = (id, image, name, price, quantity) => {
   const cartItemDelete = newItem.querySelector('.cart-item-delete');
   cartItemDelete.addEventListener('click', () => {
     let quantityNum = newItem.querySelector('.cart-item-quantity-num');
-    num = Number(quantityNum.innerText)
+    let num = Number(quantityNum.innerText)
 
     // update the cart data
     let idx = cartData.findIndex(e => e.id == id);
@@ -181,7 +185,6 @@ if (cartData != null) {
 } else {
   cartData = [];
 }
-
 
 // Retrieve the 'add to cart' button element in product page
 const productAddToCartBtn = document.querySelector('.product-addtocart-btn');

@@ -97,7 +97,6 @@
       </div>
 
       <?php include "support.php"; ?>
-
     </main>
 
     <!-- Footer section -->
