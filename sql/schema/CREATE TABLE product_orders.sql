@@ -5,5 +5,5 @@ CREATE TABLE product_orders (
     quantity INT NOT NULL,
     subtotal DECIMAL(5,2) NOT NULL,
     FOREIGN KEY (order_id) REFERENCES orders(order_id),
-    FOREIGN KEY (product_id) REFERENCES products(product_id)
+    FOREIGN KEY (product_id) REFERENCES product(id)
 );
