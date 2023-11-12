@@ -146,10 +146,10 @@ if (itemAddToCartBtns !== null) {
 
       let props = item.children;
 
-      let image = props[0].children[0].src;
-      let name = props[1].innerText;
-      let price = Number(props[2].innerText);
-      let quantity = Number(props[3].children[0].value);
+      let image = props[1].children[0].src;
+      let name = props[2].innerText;
+      let price = Number(props[3].innerText);
+      let quantity = Number(props[4].children[0].value);
 
       // Update cart data
       let newlyAdded = true;

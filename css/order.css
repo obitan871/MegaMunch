@@ -36,6 +36,11 @@
   align-items: center;
 }
 
+.order-item:last-child {
+  padding-bottom: 1.5rem;
+  border: 0;
+}
+
 .order-item img {
   width: 100px;
   height: 100px;
@@ -90,44 +95,45 @@
   border-top: 3px solid lightsalmon;
 }
 
-.order-summary-total-before-tax,
-.order-summary-total-tax,
-.order-summary-total-after-tax {
+.order-summary-subtotal,
+.order-summary-tax,
+.order-summary-total {
   display: flex;
   width: 200px;
   justify-content: space-between;
+  margin-top: 5px;
   margin-bottom:5px;
 }
 
-  /*
+.order-summary-subtotal {
+  padding-top: 10px;
+}
 
-  .order-summary-total-before-tax,
-  .order-summary-total-tax,
-  .order-summary-total-after-tax {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 30%;
-    padding-top: 1rem;
-    padding-right: 4rem;
-  }
+.order-summary-subtotal-num::before,
+.order-summary-tax-num::before,
+.order-summary-total-num::before {
+  content: '$ ';
+}
 
-  .order-summary-pay-this {
-    margin-top: 2rem;
-  }
+.order-summary-pay-this {
+  margin-top: 1rem;
+}
 
-  .order-summary-pay-this-btn {
-    background: rgb(150 136 237);
-    color: white;
-    height: 36px;
-    width: 200px;
-    font-size: 17px;
-    cursor: pointer;
-    border: 1px solid grey;
-    border-radius: 10px;
-  }
+.order-summary-pay-this-btn {
+  background: rgb(150 136 237);
+  color: white;
+  height: 36px;
+  width: 200px;
+  font-size: 17px;
+  cursor: pointer;
+  border: 1px solid grey;
+  border-radius: 10px;
+}
 
-  .order-summary-pay-this-btn:hover {
-    background: rgb(160 149 231);
-  }
- */
+.order-summary-pay-this-btn:hover {
+  background: rgb(160 149 231);
+}
+
+#result {
+  text-align: center;
+}

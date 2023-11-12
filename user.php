@@ -8,12 +8,6 @@ class User {
     function isSignedIn() {
         return $this->isSignedIn;
     }
-
-    function signIn() {
-        if (isSignedIn()) {
-            return;
-        }
-    }
 }
 
 ?>

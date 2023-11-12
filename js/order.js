@@ -3,13 +3,36 @@ var cartData = JSON.parse(localStorage.getItem("cartData"));
 
 const cartAmt = document.getElementById('cart-amount');
 
+const refreshSummary = () => {
+  let subtotal = 0;
+  cartData.forEach((e) => {
+    subtotal += e.price * e.quantity;
+  });
+  subtotal = Math.round(subtotal * 100)/100;
+
+  let tax = subtotal * 0.12;
+  tax = Math.round(tax * 100)/100;
+
+  let total = subtotal + tax;
+  total = Math.round(total * 100)/100;
+
+  const sumSubtotal = document.querySelector('.order-summary-subtotal-num');
+  sumSubtotal.innerText = subtotal;
+
+  const sumTax = document.querySelector('.order-summary-tax-num');
+  sumTax.innerText = tax;
+
+  const sumTotal = document.querySelector('.order-summary-total-num');
+  sumTotal.innerText = total;
+};
+
 const orderItems = document.querySelector(".order-items");
 if (cartData != null) {
   cartData.forEach((e) => {
     let newItem = document.createElement('div');
     newItem.classList.add('order-item');
     newItem.dataset.id = e.id;
-    let subtotal = Number(e.quantity) * Number(e.price);
+    let subtotal = Math.round(Number(e.quantity) * Number(e.price) * 100)/100;
 
     newItem.innerHTML = `
       <img src="${e.image}">
@@ -47,11 +70,14 @@ if (cartData != null) {
 
         localStorage.setItem("cartData", JSON.stringify(cartData));
 
-        // Update the order table
+        // Update the entry in the order table
         quantityNum.innerText = num;
 
         let subtotal = newItem.querySelector('.order-item-subtotal');
         subtotal.innerText = Math.round(Number(e.price) * num * 100)/100;
+
+        // Refresh the summary in the order table
+        refreshSummary();
 
         // Update the shopping cart in the sidebar
         addToCart(e.id, e.image, e.name, e.price, -1);
@@ -76,11 +102,14 @@ if (cartData != null) {
 
       localStorage.setItem("cartData", JSON.stringify(cartData));
 
-      // Update the order table
+      // Update the entry in the order table
       quantityNum.innerText = num;
 
       let subtotal = newItem.querySelector('.order-item-subtotal');
       subtotal.innerText = Math.round(Number(e.price) * num * 100)/100;
+
+      // Refresh the summary
+      refreshSummary();
 
       // Update the shopping cart in the sidebar
       addToCart(e.id, e.image, e.name, e.price, 1);
@@ -101,11 +130,23 @@ if (cartData != null) {
       // Update order list
       orderItems.removeChild(orderItemDelete.parentNode);
 
-      // update the summary
-
+      // Refresh the summary
+      refreshSummary();
 
       // Update the shopping cart in the sidebar
       addToCart(e.id, e.image, e.name, e.price, -num);
     });
-  })
+  });
+
+  refreshSummary();
+}
+
+const payThis = document.querySelector('.order-summary-pay-this-btn');
+if (payThis != null) {
+  payThis.addEventListener('click', () => {
+    const orderData = document.getElementById("orderData");
+    orderData.value = JSON.stringify(cartData);
+  
+    document.getElementById("order-form").submit();
+  });
 }

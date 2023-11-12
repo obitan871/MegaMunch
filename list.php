@@ -6,15 +6,47 @@
     $cid = $_GET["id"];
   }
 
-  $sql = "SELECT p.id, p.name, p.image, p.price, c.name ".
-    "FROM Product p ".
-    "INNER JOIN ProductCategory pc ".
-    "INNER JOIN Category c ".
-    "WHERE p.id = pc.pid AND pc.cid = c.id AND p.quantity > 0";
-  
-  if ($cid != null) {
-    $sql .= " AND pc.cid = ?";
+  $sql = "";
+  if ((int)$cid < 2000) {
+    $sql =
+      "SELECT t1.pid, t1.pname, t1.pimage, t1.pprice, t1.cname, t2.cname " .
+      "FROM ".
+      "(SELECT p.id as pid, p.name as pname, p.image as pimage, p.price as pprice, c.id as cid, c.name as cname " .
+      "FROM `Product` p ".
+      "INNER JOIN ProductCategory pc " .
+      "ON p.id = pc.pid " .
+      "INNER JOIN Category c " .
+      "ON pc.cid = c.id WHERE c.id < 2000 AND p.quantity > 0";
+    
+    if ($cid != null) {
+      $sql .= " AND pc.cid = ?";
+    }
+    
+    $sql .=
+      ") t1 " .
+      "LEFT JOIN " .
+      "(SELECT p.id as pid, p.name as pname, c.id as cid, c.name as cname " .
+      "FROM `Product` p " .
+      "INNER JOIN ProductCategory pc " .
+      "ON p.id = pc.pid " .
+      "INNER JOIN Category c " .
+      "ON pc.cid = c.id WHERE c.id > 2000 AND p.quantity > 0" .
+      ") t2 " .
+      "ON t1.pid = t2.pid";
+  } else {
+    $sql =
+      "SELECT p.id as pid, p.name as pname, p.image as pimage, p.price as pprice, c.name, c.name ".
+      "FROM `Product` p ".
+      "INNER JOIN ProductCategory pc ".
+      "ON p.id = pc.pid ".
+      "INNER JOIN Category c ".
+      "ON pc.cid = c.id WHERE p.quantity > 0";
+
+    if ($cid != null) {
+      $sql .= " AND pc.cid = ?";
+    }
   }
+
 ?>
 
 <!DOCTYPE html>
@@ -55,9 +87,8 @@
           
           // Execute the prepared statement
           if (mysqli_stmt_execute($stmt)) {
-      
             // Bind result to variables
-            mysqli_stmt_bind_result($stmt, $id, $name, $image, $price, $cname);
+            mysqli_stmt_bind_result($stmt, $id, $name, $image, $price, $cname1, $cname2);
       
             mysqli_stmt_fetch($stmt);
           }
@@ -69,15 +100,20 @@
       <nav class="breadcrumbs">
         <ul>
           <li><a href="./index.php">Home</a></li>
-          <li><?php echo ($cid != null) ? $cname : "Shop All"; ?></li>
+          <li><?php echo ($cid != null) ? $cname1 : "Shop All"; ?></li>
         </ul>
       </nav>
 
       <div class="items">
         <?php
           do {
-            echo "<div class=\"item\" data-id=\"$id\">\r\n".
-                 "  <a href=\"product.php?id=$id\"><img src=\"$image\" class=\"item-img\"></a>\r\n".
+            $item = "<div class=\"item\" data-id=\"$id\">\r\n";
+            if ($cname2 != null) {
+              $item .= "  <div class=\"item-tag\">$cname2</div>\r\n";
+            } else {
+              $item .= "  <div></div>\r\n";
+            }
+            $item .= "  <a href=\"product.php?id=$id\"><img src=\"$image\" class=\"item-img\"></a>\r\n".
                  "  <div class=\"item-name\">$name</div>\r\n".
                  "  <div class=\"item-price\">$price</div>\r\n".
                  "  <div class=\"item-quantity\">\r\n".
@@ -85,6 +121,8 @@
                  "  </div>\r\n".
                  "  <button class=\"item-addtocart-btn\">Add to Cart</button>\r\n".
                  "</div>\r\n";
+
+            echo $item;
           } while (mysqli_stmt_fetch($stmt));
 
           mysqli_stmt_close($stmt);

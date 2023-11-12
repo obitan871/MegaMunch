@@ -1,0 +1,47 @@
+.signup-table {
+    display: flex;
+    flex-direction: column;
+    margin: 3rem auto;
+    padding: 0px 2rem;
+    min-width: 500px;
+    max-width: 32%;
+    margin-bottom: 300px;
+    border: 1px solid lightgrey;
+}
+
+.signup-username,
+.signup-password,
+.signup-confirm-password,
+.signup-first-name,
+.signup-last-name,
+.signup-email {
+    display: grid;
+    grid-template-columns: 40% 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    height: 3.5rem;
+    align-items: center;
+    justify-content: end;
+}
+
+.signup-error {
+    grid-column: 1 / span 2;
+    font-size: small;
+    color: red;
+    font-weight: bold;
+}
+
+.signup-table input[type=text],
+.signup-table input[type=password] {
+    height: 28px;
+}
+
+.signup-submit {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto 50px;
+}
+
+.signup-submit-btn {
+    width: 150px;
+    height: 40px;
+}

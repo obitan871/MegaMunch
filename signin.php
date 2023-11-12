@@ -1,8 +1,9 @@
 <?php
+require_once "dbconfig.php";
+require_once "user.php";
+
 // Initialize the session
 session_start();
-
-require_once('./user.php');
 
 // If the current user is already logged in, redirect to the home page
 $user = new User;
@@ -35,25 +36,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   // Validate credential
   if (empty($error_message)) {
+    $sql = "SELECT `id`, `password` FROM `User` WHERE username = ?";
 
-    //
-    //
-    //
+    if ($stmt = mysqli_prepare($conn, $sql)) {
+      // Bind variables to prepare statement
+      mysqli_stmt_bind_param($stmt, "s", $username);
 
-    // Start a new session
-    session_start();
+      // Execute the prepared statement
+      if (mysqli_stmt_execute($stmt)) {
+        // Store result
+        mysqli_stmt_store_result($stmt);
 
-    // Initialize user information
-    $user->id = $id;
-    $user->username = $username;
-    $user->isSignedIn = true;
+        if (mysqli_stmt_num_rows($stmt) == 1) {
+          mysqli_stmt_bind_result($stmt, $id, $hashed_password);
 
-    // Initialize session variables
-    $_SESSION['user'] = serialize($user);
+          if (mysqli_stmt_fetch($stmt) && password_verify($password, $hashed_password)) {
+            session_start();
 
-    // Redirect to the home page
-    header("location: index.php");
+            // Initialize user information
+            $user->id = $id;
+            $user->username = $username;
+            $user->isSignedIn = true;
+
+            // Initialize session variables
+            $_SESSION['user'] = serialize($user);
+
+            // Redirect to the home page
+            header("location: index.php");
+          } else {
+            $username_error = "Invalid username or password.";
+          }
+        } else {
+          $username_error = "Invalid username or password.";
+        }
+      }
+
+      mysqli_stmt_close($stmt);
+    }
   }
+
+  // Close connection
+  mysqli_close($conn);
 }
 ?>
 

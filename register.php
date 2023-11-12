@@ -2,8 +2,8 @@
 require_once "dbconfig.php";
 
 // Initialize variables
-$username = $email = $password = $confirm_password = "";
-$username_error = $email_error = $password_error = $confirm_password_error = "";
+$username = $password = $confirm_password = $fname = $lname = $email = "";
+$username_error = $password_error = $confirm_password_error = $fname_error = $lname_error = $email_error = "";
 
 // Process form data
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username_error = "Username can only contain letters, numbers, and underscores.";
     } else {
         // Perform duplicate check
-        $sql = "SELECT id FROM users WHERE username = ?";
+        $sql = "SELECT id FROM `User` WHERE username = ?";
 
         if ($stmt = mysqli_prepare($conn, $sql)) {
             // Bind variables to prepare statement
@@ -43,15 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Check email
-    if (empty(trim($_POST["email"]))) {
-        $email_error = "Please enter your email address.";
-    } elseif (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-        $email_error = "Email is invalid.";
-    } else {
-        $email = trim($_POST["email"]);
-    }
-
     // Check password
     if (empty(trim($_POST["password"]))) {
         $password_error = "Please enter a password.";
@@ -71,19 +62,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
+    // Check first name
+    if (empty(trim($_POST["fname"]))) {
+        $fname_error = "Please enter your first name.";
+    } else {
+        $fname = trim($_POST["fname"]);
+    }
+
+    // Check last name
+    if (empty(trim($_POST["lname"]))) {
+        $lname_error = "Please enter your last name.";
+    } else {
+        $lname = trim($_POST["lname"]);
+    }
+
+    // Check email
+    if (empty(trim($_POST["email"]))) {
+        $email_error = "Please enter your email address.";
+    } elseif (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+        $email_error = "Email is invalid.";
+    } else {
+        $email = trim($_POST["email"]);
+
+    }
+
     // If no input errors, create new user record
-    if (empty($username_error) && empty($password_error) && empty($confirm_password_error)) {
+    if (empty($username_error) && empty($password_error) && empty($confirm_password_error) &&
+        empty($fname_error) && empty($lname_error) && empty($email_error)) {
         // Perform an insertion
-        $sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO `User` (username, password, firstname, lastname, email) VALUES (?, ?, ?, ?, ?)";
 
         if ($stmt = mysqli_prepare($conn, $sql)) {
             // Bind variables to prepare statement
-            mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password, $param_email);
+            mysqli_stmt_bind_param($stmt, "sssss", $username, $param_password, $fname, $lname, $email);
 
+            echo "alert(\"" . $password . ": " . password_hash($password, PASSWORD_DEFAULT) . "\");";
+            
             // Set parameters
-            $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT);
-            $param_email = $email;
 
             // Execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
@@ -109,54 +125,84 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="icon" href="img/icon.png">
-
   <title>Register | MegaMunch</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <link href="css/signup.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1" rel="stylesheet" />
 </head>
 
 <body>
-  <main>
-    <h2>Sign Up</h2>
-    <p>Please fill this form to create an account</p>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-      <!-- username -->
-      <div>
-        <label>Username: </label>
-        <input type="text" name="username" <?php echo (!empty($username_error)) ? 'is-invalid' : ''; ?> value="<?php echo $username; ?>">
-        <span><?php echo $username_error; ?></span>
+  <div class="container">
+
+    <!-- Header section -->
+    <?php include 'header.php'; ?>
+
+    <!-- Main section -->
+    <main style="background: white;">
+      <div class="signup-table">
+
+        <h2>Sign Up</h2>
+        <p>Please fill this form to create an account</p>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+          <!-- username -->
+          <div class="signup-username">
+            <label>Username: </label>
+            <input type="text" name="username" <?php echo (!empty($username_error)) ? 'is-invalid' : ''; ?> value="<?php echo $username; ?>">
+            <span class="signup-error"><?php echo $username_error; ?></span>
+          </div>
+    
+          <!-- password -->
+          <div class="signup-password">
+            <label>Password: </label>
+            <input type="password" name="password" <?php echo (!empty($password_error)) ? 'is-invalid' : ''; ?> value="<?php echo $password; ?>">
+            <span class="signup-error"><?php echo $password_error; ?></span>
+          </div>
+    
+          <!-- confirm password -->
+          <div class="signup-confirm-password">
+            <label>Confirm Password: </label>
+            <input type="password" name="confirm_password" <?php echo (!empty($confirm_password_error)) ? 'is-invalid' : ''; ?> value="<?php echo $confirm_password; ?>">
+            <span class="signup-error"><?php echo $confirm_password_error; ?></span>
+          </div>
+    
+          <!-- first name -->
+          <div class="signup-first-name">
+            <label>First Name: </label>
+            <input type="text" name="fname" <?php echo (!empty($fname_error)) ? 'is-invalid' : ''; ?> value="<?php echo $fname; ?>">
+            <span class="signup-error"><?php echo $fname_error; ?></span>
+          </div>
+
+          <!-- last name -->
+          <div class="signup-last-name">
+            <label>Last Name: </label>
+            <input type="text" name="lname" <?php echo (!empty($lname_error)) ? 'is-invalid' : ''; ?> value="<?php echo $lname; ?>">
+            <span class="signup-error"><?php echo $lname_error; ?></span>
+          </div>
+
+          <!-- email -->
+          <div class="signup-email">
+            <label>Email: </label>
+            <input type="text" name="email" <?php echo (!empty($email_error)) ? 'is-invalid' : ''; ?> value="<?php echo $email; ?>">
+            <span class="signup-error"><?php echo $email_error; ?></span>
+          </div>
+    
+          <!-- submit -->
+          <div class="signup-submit">
+            <input type="submit" class="signup-submit-btn" value="Create Account">
+          </div>
+          <p>Already have an account? <a href="signin.php">Sign In here</a>.</p>
+        </form>
       </div>
 
-      <!-- email -->
-      <div>
-        <label>Email: </label>
-        <input type="text" name="email" <?php echo (!empty($email_error)) ? 'is-invalid' : ''; ?> value="<?php echo $email; ?>">
-        <span><?php echo $email_error; ?></span>
-      </div>
+      <?php include "support.php"; ?>
+    </main>
 
-      <!-- password -->
-      <div>
-        <label>Password: </label>
-        <input type="password" name="password" <?php echo (!empty($password_error)) ? 'is-invalid' : ''; ?> value="<?php echo $password; ?>">
-        <span><?php echo $password_error; ?></span>
-      </div>
+    <!-- Footer section -->
+    <footer>© 2022 - 2023 MegaMunch Ltd. All Rights Reserved.</footer>
 
-      <!-- confirm password -->
-      <div>
-        <label>Confirm Password: </label>
-        <input type="password" name="confirm_password" <?php echo (!empty($confirm_password_error)) ? 'is-invalid' : ''; ?> value="<?php echo $confirm_password; ?>">
-        <span><?php echo $confirm_password_error; ?></span>
-      </div>
-
-      <!-- submit & reset -->
-      <div>
-        <input type="submit" value="Submit">
-        <input type="reset" value="Reset">
-      </div>
-      <p>Already have an account? <a href="signin.php">Sign In here</a>.</p>
-    </form>
-  </main>
+  </div>
 </body>
 
 </html>

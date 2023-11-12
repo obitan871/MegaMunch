@@ -34,19 +34,13 @@
         <div class="carousel-track-container">
           <ul class="carousel-track">
             <li class="carousel-slide">
-              <a href=""><img class="carousel-img" src="img/pic_1.jpg"></a>
+              <a href="list.php?id=2001"><img class="carousel-img" src="img/pic_1.jpg"></a>
             </li>
             <li class="carousel-slide">
-              <a href=""><img class="carousel-img" src="img/pic_2.jpg"></a>
+              <a href="list.php?id=2002"><img class="carousel-img" src="img/pic_2.jpg"></a>
             </li>
             <li class="carousel-slide">
-              <a href=""><img class="carousel-img" src="img/pic_3.jpg"></a>
-            </li>
-            <li class="carousel-slide">
-              <a href=""><img class="carousel-img" src="img/pic_4.jpg"></a>
-            </li>
-            <li class="carousel-slide">
-              <a href=""><img class="carousel-img" src="img/pic_5.jpg"></a>
+              <a href="list.php?id=2003"><img class="carousel-img" src="img/pic_3.jpg"></a>
             </li>
           </ul>
         </div>
@@ -56,8 +50,6 @@
           </svg>
         </button>
         <div class="carousel-nav">
-          <button class="carousel-indicator"></button>
-          <button class="carousel-indicator"></button>
           <button class="carousel-indicator"></button>
           <button class="carousel-indicator"></button>
           <button class="carousel-indicator"></button>

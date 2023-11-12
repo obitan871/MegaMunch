@@ -9,8 +9,10 @@
   $sql = "SELECT p.name, p.image, p.price, p.description, c.id, c.name ".
     "FROM Product p ".
     "INNER JOIN ProductCategory pc ".
+    "ON p.id = pc.pid ".
     "INNER JOIN Category c ".
-    "WHERE p.id = pc.pid AND pc.cid = c.id AND p.id = ?";
+    "ON pc.cid = c.id ".
+    "WHERE p.id = ? AND c.id < 2000";
 ?>
 
 <!DOCTYPE html>
@@ -53,12 +55,10 @@
             // Store result
             mysqli_stmt_store_result($stmt);
             
-            if (mysqli_stmt_num_rows($stmt) == 1) {
-              // Bind result to variables
-              mysqli_stmt_bind_result($stmt, $name, $image, $price, $desc, $cid, $cname);
+            // Bind result to variables
+            mysqli_stmt_bind_result($stmt, $name, $image, $price, $desc, $cid, $cname);
 
-              mysqli_stmt_fetch($stmt);
-            }
+            mysqli_stmt_fetch($stmt);
           }
         }
       ?>
