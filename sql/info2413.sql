@@ -222,6 +222,7 @@ CREATE TABLE `User` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `firstname` varchar(50) NOT NULL,
+  `user_type` VARCHAR(20) NOT NULL DEFAULT 'customer',
   `lastname` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
   `address` varchar(255) DEFAULT NULL
@@ -231,8 +232,8 @@ CREATE TABLE `User` (
 -- Dumping data for table `User`
 --
 
-INSERT INTO `User` (`id`, `username`, `password`, `firstname`, `lastname`, `email`, `address`) VALUES
-(4, 'jiadong', '$2y$10$4pLaln9poNotdtebf3bw1ObR8CnyalNVcdFeopQQTuNXEbZZuzRlW', 'jiadong', 'chen', 'jiadong.chen1@student.kpu.ca', NULL);
+INSERT INTO `User` (`id`, `username`, `password`, `user_type`, `firstname`, `lastname`, `email`, `address`) VALUES
+(4, 'jiadong', '$2y$10$4pLaln9poNotdtebf3bw1ObR8CnyalNVcdFeopQQTuNXEbZZuzRlW', 'admin', 'jiadong', 'chen', 'jiadong.chen1@student.kpu.ca', NULL);
 
 --
 -- Indexes for dumped tables
