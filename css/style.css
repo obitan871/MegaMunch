@@ -235,7 +235,13 @@ main {
   margin-top: 50px;
   padding-left: 0;
 }
-
+.support-info ul li a {
+	text-decoration:none;
+	color:white;
+}
+.support-info ul li a:hover {
+	color:black;
+}
 .support-info hr {
   border: 1px solid rgba(211, 211, 211, 0.5);
   width: 95%;
@@ -250,6 +256,9 @@ main {
   margin-top: 2rem;
 }
 
+.User-Info {
+	text-align: center;
+}
 footer {
   margin: 1.5rem auto;
   text-align: center;
