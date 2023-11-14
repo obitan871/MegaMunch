@@ -30,9 +30,10 @@
 			<li>Grocery Clerk</li>
 			<li>Cashier</li>
 			<li>Supervisor</li>
-			<li>department Managers</li>
+			<li>Department Managers</li>
 			<br>
 			<p>Apply Now <!--Not set up-->
+			<br>
 			If you wish to apply for one of these jobs click the link above</p>
 		</div>
       <?php include "support.php"; ?>  
