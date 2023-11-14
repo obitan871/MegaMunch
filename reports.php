@@ -46,41 +46,41 @@
                 $password = ""; 
                 $database = "info2413"; 
                 $mysqli = new mysqli("localhost", $username, $password, $database); 
-                $query = "Select COUNT(users.customer_id) FROM users;";
+                $query = "Select COUNT(user.id) FROM user;";
                 $totalusers;
 
                 if ($result = $mysqli->query($query)) {
                   while ($row = $result->fetch_assoc()) {
-                      $totalusers = $row["COUNT(users.customer_id)"];
+                      $totalusers = $row["COUNT(user.id)"];
                   }
                   $result->free();
                 }
 
-                $query = "Select product.name, SUM(product_orders.subtotal), COUNT(product_orders.product_order_id), SUM(product_orders.quantity), COUNT(DISTINCT(users.customer_id)) FROM product JOIN product_orders ON product.id = product_orders.product_id JOIN orders ON orders.order_id = product_orders.order_id JOIN users ON users.customer_id = orders.customer_id GROUP BY product.name;";
+                $query = "Select product.name, SUM(orderentry.price), COUNT(orderentry.id), SUM(orderentry.quantity), COUNT(DISTINCT(user.id)) FROM product JOIN orderentry ON product.id = orderentry.pid JOIN `order` ON `order`.id = orderentry.oid JOIN user ON user.id = `order`.uid GROUP BY product.name;";
 
                 if ($result = $mysqli->query($query)) {
                     while ($row = $result->fetch_assoc()) {
-                        $field1name = $row["name"];
-                        $field2name = $row["SUM(product_orders.subtotal)"];
-                        $totalorders = $row["COUNT(product_orders.product_order_id)"];
-                        $field3name = $row["SUM(product_orders.quantity)"];
-                        $field4name = $row["COUNT(DISTINCT(users.customer_id))"];
+                        $productname = $row["name"];
+                        $netsales = $row["SUM(orderentry.price)"];
+                        $totalorders = $row["COUNT(orderentry.id)"];
+                        $avgquantity = $row["SUM(orderentry.quantity)"];
+                        $popularity = $row["COUNT(DISTINCT(user.id))"];
 
-                        $field2name .= "$";
-                        $field3name /= $totalorders;
-                        $field4name /= $totalusers;
+                        $netsales .= "$";
+                        $avgquantity /= $totalorders;
+                        $popularity /= $totalusers;
 
-                        $field3name = number_format((float)$field3name, 2, '.', '');
-                        $field4name = number_format((float)$field4name, 2, '.', '') * 100;
+                        $avgquantity = number_format((float)$avgquantity, 2, '.', '');
+                        $popularity = number_format((float)$popularity, 2, '.', '') * 100;
 
-                        $field4name .= "%";
+                        $popularity .= "%";
 
 
                         echo '<tr> 
-                                <td>'.$field1name.'</td> 
-                                <td>'.$field2name.'</td> 
-                                <td>'.$field3name.'</td> 
-                                <td>'.$field4name.'</td> 
+                                <td>'.$productname.'</td> 
+                                <td>'.$netsales.'</td> 
+                                <td>'.$avgquantity.'</td> 
+                                <td>'.$popularity.'</td> 
                             </tr>';
                     }
                     $result->free();
@@ -95,13 +95,7 @@
                                  <p>&nbsp;</p>
                                  <p>&nbsp;</p>
 
-                
-                
-    
-                
                     <?php include "support.php"; ?>
-                    
-    
 
     <!-- Footer section -->
     <footer>© 2022 - 2023 MegaMunch Ltd. All Rights Reserved.</footer>
@@ -124,5 +118,3 @@
 
 </body>
 </html>
-
-
