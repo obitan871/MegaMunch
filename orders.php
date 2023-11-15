@@ -23,7 +23,8 @@
     "ON o.id = oe.oid " .
     "INNER JOIN Product p " .
     "ON oe.pid = p.id " .
-    "WHERE o.uid = ?";  
+    "WHERE o.uid = ? ".
+    "ORDER BY o.id";  
 ?>
 
 <!DOCTYPE html>

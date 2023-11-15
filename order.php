@@ -42,14 +42,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO `Order` (uid, subtotal, tax, total) VALUES (?, ?, ?, ?)";
     if ($stmt = mysqli_prepare($conn, $sql)) {
       // Bind parameters
-      mysqli_stmt_bind_param($stmt, "iiii", $param_user, $subtotal, $tax, $total);
+      mysqli_stmt_bind_param($stmt, "iddd", $param_user, $subtotal, $tax, $total);
 
       $param_user = $user->id;
 
       if (mysqli_stmt_execute($stmt)) {
         $oid = mysqli_insert_id($conn);
 
-        $order_submission_result = "<h2 id=\"result\">Thank you for your order! (id: " . $oid . ")</h2>";
+        $order_submission_result = "<h2 id=\"result\">Thank you for your order! (id: $oid)</h2>";
       } else {
         $order_submission_result = "<h2 id=\"result\">Sorry. Something went wrong. Please try again later.</h2>";
       }

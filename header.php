@@ -29,7 +29,7 @@
       </nav>
       <label for="header-nav-toggle" class="header-nav-toggle-label"><span></span></label>
       <div class="header-search">
-        <input type="text" placeholder="Search...">
+        <input class="header-search-input" type="text" placeholder="Search...">
       </div>
       <div class="header-user-menu">
         <ul>
@@ -47,3 +47,5 @@
         </ul>
       </div>
     </header>
+
+    <script src="js/header.js"></script>

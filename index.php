@@ -34,13 +34,13 @@
         <div class="carousel-track-container">
           <ul class="carousel-track">
             <li class="carousel-slide">
-              <a href="list.php?id=2001"><img class="carousel-img" src="img/pic_1.jpg"></a>
+              <a href="list.php?id=2001"><img class="carousel-img" src="img/on-sale.jpg"></a>
             </li>
             <li class="carousel-slide">
-              <a href="list.php?id=2002"><img class="carousel-img" src="img/pic_2.jpg"></a>
+              <a href="list.php?id=2002"><img class="carousel-img" src="img/most-popular.jpg"></a>
             </li>
             <li class="carousel-slide">
-              <a href="list.php?id=2003"><img class="carousel-img" src="img/pic_3.jpg"></a>
+              <a href="list.php?id=2003"><img class="carousel-img" src="img/new-arrival.jpg"></a>
             </li>
           </ul>
         </div>

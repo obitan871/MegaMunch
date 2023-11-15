@@ -104,3 +104,9 @@ nav.addEventListener('click', e => {
   toIndicator.classList.add('carousel-current-slide');
 });
 
+window.onresize = function() {
+  const slideWidth = document.querySelector('.carousel-track-container').clientWidth;
+  slides.forEach((slide, idx) => {
+    slide.style.left = slideWidth * idx + 'px';
+  });
+};

@@ -1,10 +1,8 @@
 <?php
   require_once "dbconfig.php";
 
-  $cid = null;
-  if (isset($_GET["id"])) {
-    $cid = $_GET["id"];
-  }
+  $search = $_GET["search"];
+  $cid = $_GET["id"];
 
   $sql = "";
   if ((int)$cid < 2000) {
@@ -20,6 +18,10 @@
     
     if ($cid != null) {
       $sql .= " AND pc.cid = ?";
+    }
+
+    if ($search != null) {
+      $sql .= " AND p.name like ?";
     }
     
     $sql .=
@@ -46,7 +48,6 @@
       $sql .= " AND pc.cid = ?";
     }
   }
-
 ?>
 
 <!DOCTYPE html>
@@ -78,11 +79,19 @@
     <main style="background: white;">
       <?php
         if ($stmt = mysqli_prepare($conn, $sql)) {
-          if ($cid != null) {
-            // Bind category to prepare statement
+          if ($cid != null && $search != null) {
+            mysqli_stmt_bind_param($stmt, "is", $param_cid, $param_search);
+
+            $param_cid = $cid;
+            $param_search = "%$search%";
+          } else if ($cid != null) {
             mysqli_stmt_bind_param($stmt, "i", $param_cid);
       
             $param_cid = $cid;
+          } else if ($search != null) {
+            mysqli_stmt_bind_param($stmt, "s", $param_search);
+
+            $param_search = "%$search%";
           }
           
           // Execute the prepared statement
@@ -90,40 +99,55 @@
             // Bind result to variables
             mysqli_stmt_bind_result($stmt, $id, $name, $image, $price, $cname1, $cname2);
       
-            mysqli_stmt_fetch($stmt);
+            $has_data = mysqli_stmt_fetch($stmt);
           }
         }
       ?>
 
       <p>&nbsp;</p>
-      <p>&nbsp;</p>
+      <h2 style="text-align: center">
+        <?php
+          $title = "";
+          if ($search != null) {
+            $title = "Search result for: $search";
+          } else if ($cid != null) {
+            $title = $cname1;
+          } else {
+            $title = "Shop All";
+          }
+
+          echo $title;
+        ?>
+      </h2>
       <nav class="breadcrumbs">
         <ul>
           <li><a href="./index.php">Home</a></li>
-          <li><?php echo ($cid != null) ? $cname1 : "Shop All"; ?></li>
+          <li><?php echo $title; ?></li>
         </ul>
       </nav>
 
       <div class="items">
         <?php
-          do {
-            $item = "<div class=\"item\" data-id=\"$id\">\r\n";
-            if ($cname2 != null) {
-              $item .= "  <div class=\"item-tag\">$cname2</div>\r\n";
-            } else {
-              $item .= "  <div></div>\r\n";
-            }
-            $item .= "  <a href=\"product.php?id=$id\"><img src=\"$image\" class=\"item-img\"></a>\r\n".
-                 "  <div class=\"item-name\">$name</div>\r\n".
-                 "  <div class=\"item-price\">$price</div>\r\n".
-                 "  <div class=\"item-quantity\">\r\n".
-                 "    <input class=\"item-quantity-input\" type=\"number\" value=\"1\" />\r\n".
-                 "  </div>\r\n".
-                 "  <button class=\"item-addtocart-btn\">Add to Cart</button>\r\n".
-                 "</div>\r\n";
-
-            echo $item;
-          } while (mysqli_stmt_fetch($stmt));
+          if ($has_data) {
+            do {
+              $item = "<div class=\"item\" data-id=\"$id\">\r\n";
+              if ($cname2 != null) {
+                $item .= "  <div class=\"item-tag\">$cname2</div>\r\n";
+              } else {
+                $item .= "  <div></div>\r\n";
+              }
+              $item .= "  <a href=\"product.php?id=$id\"><img src=\"$image\" class=\"item-img\"></a>\r\n".
+                   "  <div class=\"item-name\">$name</div>\r\n".
+                   "  <div class=\"item-price\">$price</div>\r\n".
+                   "  <div class=\"item-quantity\">\r\n".
+                   "    <input class=\"item-quantity-input\" type=\"number\" value=\"1\" />\r\n".
+                   "  </div>\r\n".
+                   "  <button class=\"item-addtocart-btn\">Add to Cart</button>\r\n".
+                   "</div>\r\n";
+  
+              echo $item;
+            } while (mysqli_stmt_fetch($stmt));
+          }
 
           mysqli_stmt_close($stmt);
 

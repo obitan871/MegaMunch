@@ -1,0 +1,106 @@
+.chart-container {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  margin: 100px auto;
+  width: fit-content;
+  border-left: 1px solid grey;
+  border-bottom: 1px solid grey;
+  padding-left: 30px;
+  padding-right: 60px;
+  box-shadow: -2px 3px 2px 0 #d7d7d7;
+}
+
+.chart-set {
+  position: relative;
+  display: flex;
+}
+
+.chart-set-label {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 35px;
+  font-weight: bold;
+}
+
+.chart {
+  position: relative;
+  text-align: center;
+  height: 550px;
+  width: 40px;
+  margin: 0 1px;
+}
+
+.chart-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 0 2px rgba(35, 35, 35, .6);
+  transition: all 0.3s cubic-bezier(1, 0, 0, 1);
+}
+
+.chart-bar:hover {
+  box-shadow: 0 0 8px rgba(50, 50, 50, 0.6);
+}
+
+.chart-bar:hover::before {
+  content: attr(amt);
+  position: absolute;
+  background: white;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -120%);
+  z-index: 2;
+}
+
+.chart:nth-child(1) .chart-bar {
+  /* background: rgb(245, 184, 93);*/
+  background-image: linear-gradient(135deg, rgb(253, 211, 149)0%, rgb(245, 184, 93)100%);
+  height: calc(var(--val) * 1%);
+  animation: chart-bar-motion 0.5s;
+}
+
+.chart:nth-child(2) .chart-bar {
+  /* background: rgb(104, 199, 128); */
+  background-image: linear-gradient(135deg, rgb(162, 228, 178)0%, rgb(120, 204, 141)100%);
+  height: calc(var(--val) * 1%);
+  animation: chart-bar-motion 0.5s;
+}
+
+.chart:nth-child(3) .chart-bar {
+  /* background: rgb(132, 134, 224); */
+  background-image: linear-gradient(135deg, rgb(159, 132, 224)0%, rgb(109, 91, 160)100%);
+  height: calc(var(--val) * 1%);
+  animation: chart-bar-motion 1s;
+}
+
+@keyframes chart-bar-motion {
+  0% {
+    height: 0%;
+  }
+  100% {
+    height: calc(var(--val) * 1%);
+  }
+}
+
+.chart-bar-label {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  margin-top: 10px;
+}
+
+table {
+  margin: 200px auto 50px;
+  border: 1px solid grey;
+  min-width: 900px;
+}
+
+table td,
+table th {
+  border: 1px solid grey;
+}
