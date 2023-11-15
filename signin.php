@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   // Validate credential
   if (empty($error_message)) {
-    $sql = "SELECT `id`, `password` FROM `User` WHERE username = ?";
+    $sql = "SELECT `id`, `password`, `user_type` FROM `User` WHERE username = ?";
 
     if ($stmt = mysqli_prepare($conn, $sql)) {
       // Bind variables to prepare statement
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_stmt_store_result($stmt);
 
         if (mysqli_stmt_num_rows($stmt) == 1) {
-          mysqli_stmt_bind_result($stmt, $id, $hashed_password);
+          mysqli_stmt_bind_result($stmt, $id, $hashed_password, $user_type);
 
           if (mysqli_stmt_fetch($stmt) && password_verify($password, $hashed_password)) {
             session_start();
@@ -57,24 +57,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user->id = $id;
             $user->username = $username;
             $user->isSignedIn = true;
+            $user->userType = $user_type;
 
             // Initialize session variables
             $_SESSION['user'] = serialize($user);
 
-            // Redirect to the home page
-            header("location: index.php");
-          } else {
-            $username_error = "Invalid username or password.";
+            // Redirect to based on user type
+            if($user_type == 'admin') {
+                     header("location: reports.php");
+          } 
+            elseif ($user_type == 'customer') {
+              header("location: index.php");            
+              
+            }          
           }
         } else {
           $username_error = "Invalid username or password.";
         }
-      }
+      
 
       mysqli_stmt_close($stmt);
     }
+     else {
+            $username_error = "Invalid username or password.";
+      }
   }
-
+  }
   // Close connection
   mysqli_close($conn);
 }
