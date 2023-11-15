@@ -1,6 +1,0 @@
-INSERT INTO users
-  (first_name, last_name, user_type, email, adress, phone, username, password)
-VALUES
-  ('Nils', 'Bringewatt', 'admin', 'abc@gmail.com', '1234 TestStreet', 999999999, 'nils', 12345678),
-  ('Ravjot', 'Duhra', 'customer', 'xyz@gmail.com', '1234 TestStreet', 999999999, 'rav', 87654321),
-  ('Braeden', 'Scott', 'customer', '123@gmail.com', '1234 TestStreet', 999999999, 'braeden', 00000000);

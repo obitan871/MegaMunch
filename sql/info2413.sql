@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 12, 2023 at 02:15 AM
+-- Generation Time: Nov 15, 2023 at 09:35 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -74,7 +74,23 @@ INSERT INTO `Order` (`id`, `uid`, `orderdate`, `subtotal`, `tax`, `total`) VALUE
 (39, 4, '2023-11-10 21:41:30', 21.00, 2.00, 24.00),
 (40, 4, '2023-11-11 13:26:00', 47.00, 5.00, 53.00),
 (41, 4, '2023-11-11 15:50:00', 26.00, 3.00, 29.00),
-(42, 4, '2023-11-11 16:00:51', 53.00, 6.00, 59.00);
+(42, 4, '2023-11-11 16:00:51', 53.00, 6.00, 59.00),
+(43, 4, '2022-12-30 15:30:00', 587.00, 70.00, 657.00),
+(44, 4, '2022-12-30 15:45:00', 90.00, 10.00, 101.00),
+(45, 4, '2023-11-12 21:28:50', 88.00, 10.00, 99.00),
+(46, 4, '2021-11-12 21:29:12', 410.00, 49.00, 460.00),
+(47, 4, '2021-11-12 22:21:36', 162.00, 19.00, 182.00),
+(48, 4, '2022-11-12 22:23:59', 294.00, 35.00, 329.00),
+(49, 4, '2023-11-13 00:57:47', 255.00, 30.00, 286.00),
+(50, 4, '2023-11-13 00:58:12', 148.00, 17.00, 166.00),
+(51, 4, '2023-11-13 00:58:45', 269.00, 32.00, 302.00),
+(52, 4, '2023-11-13 01:21:06', 3.00, 0.00, 3.00),
+(53, 4, '2023-11-13 01:24:00', 3.00, 0.00, 3.00),
+(54, 4, '2023-11-13 01:24:25', 28.00, 3.00, 32.00),
+(55, 4, '2023-11-13 01:26:39', 5.98, 0.72, 6.70),
+(56, 4, '2023-11-14 23:51:46', 35.96, 4.32, 40.28),
+(57, 4, '2023-11-15 00:21:25', 149.00, 17.88, 166.88),
+(58, 4, '2023-11-15 00:22:27', 32.88, 3.95, 36.83);
 
 -- --------------------------------------------------------
 
@@ -114,7 +130,74 @@ INSERT INTO `OrderEntry` (`id`, `oid`, `pid`, `price`, `quantity`) VALUES
 (30, 42, 10003, 5.49, 1),
 (31, 42, 10006, 10.96, 3),
 (32, 42, 20005, 3.29, 2),
-(33, 42, 50001, 6.49, 1);
+(33, 42, 50001, 6.49, 1),
+(34, 43, 30001, 5.99, 3),
+(35, 43, 40002, 29.99, 2),
+(36, 43, 40001, 28.99, 13),
+(37, 43, 50002, 6.59, 7),
+(38, 43, 50001, 6.49, 5),
+(39, 43, 60002, 8.99, 3),
+(40, 43, 60001, 6.99, 3),
+(41, 43, 70001, 2.99, 2),
+(42, 44, 10001, 1.99, 1),
+(43, 44, 10002, 1.69, 1),
+(44, 44, 10003, 5.49, 1),
+(45, 44, 10004, 3.19, 1),
+(46, 44, 10005, 4.09, 3),
+(47, 44, 10006, 10.96, 2),
+(48, 44, 10008, 5.97, 3),
+(49, 44, 10007, 2.59, 2),
+(50, 44, 20003, 1.49, 2),
+(51, 44, 20007, 4.99, 2),
+(52, 44, 20006, 3.99, 2),
+(53, 45, 70001, 2.99, 3),
+(54, 45, 60001, 6.99, 4),
+(55, 45, 10008, 5.97, 2),
+(56, 45, 20002, 4.99, 2),
+(57, 45, 20004, 3.99, 2),
+(58, 45, 30001, 5.99, 2),
+(59, 45, 20007, 4.99, 2),
+(60, 46, 40002, 29.99, 5),
+(61, 46, 40001, 28.99, 9),
+(62, 47, 10004, 3.19, 1),
+(63, 47, 10003, 5.49, 3),
+(64, 47, 20001, 1.99, 2),
+(65, 47, 20002, 4.99, 2),
+(66, 47, 20004, 3.99, 1),
+(67, 47, 30001, 5.99, 3),
+(68, 47, 20006, 3.99, 2),
+(69, 47, 50001, 6.49, 2),
+(70, 47, 50002, 6.59, 4),
+(71, 47, 60001, 6.99, 3),
+(72, 47, 60002, 8.99, 3),
+(73, 47, 70001, 2.99, 4),
+(74, 48, 10001, 1.99, 1),
+(75, 48, 10002, 1.69, 2),
+(76, 48, 10003, 5.49, 2),
+(77, 48, 10007, 2.59, 3),
+(78, 48, 20001, 1.99, 2),
+(79, 48, 20003, 1.49, 3),
+(80, 48, 20004, 3.99, 3),
+(81, 48, 20007, 4.99, 2),
+(82, 48, 30001, 5.99, 2),
+(83, 48, 40001, 28.99, 3),
+(84, 48, 40002, 29.99, 3),
+(85, 48, 50001, 6.49, 2),
+(86, 48, 60001, 6.99, 2),
+(87, 48, 60002, 8.99, 2),
+(88, 48, 70001, 2.99, 2),
+(89, 49, 50002, 6.59, 24),
+(90, 49, 50001, 6.49, 15),
+(91, 50, 60002, 8.99, 8),
+(92, 50, 60001, 6.99, 11),
+(93, 51, 40002, 29.99, 9),
+(94, 52, 10004, 3.19, 1),
+(95, 53, 10004, 3.19, 1),
+(96, 54, 40001, 28.99, 1),
+(97, 55, 70001, 2.99, 2),
+(98, 56, 60002, 8.99, 4),
+(99, 57, 20003, 1.49, 100),
+(100, 58, 10006, 10.96, 3);
 
 -- --------------------------------------------------------
 
@@ -222,18 +305,19 @@ CREATE TABLE `User` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `firstname` varchar(50) NOT NULL,
-  `user_type` VARCHAR(20) NOT NULL DEFAULT 'customer',
   `lastname` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `address` varchar(255) DEFAULT NULL
+  `address` varchar(255) DEFAULT NULL,
+  `user_type` varchar(20) NOT NULL DEFAULT 'customer'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `User`
 --
 
-INSERT INTO `User` (`id`, `username`, `password`, `user_type`, `firstname`, `lastname`, `email`, `address`) VALUES
-(4, 'jiadong', '$2y$10$4pLaln9poNotdtebf3bw1ObR8CnyalNVcdFeopQQTuNXEbZZuzRlW', 'admin', 'jiadong', 'chen', 'jiadong.chen1@student.kpu.ca', NULL);
+INSERT INTO `User` (`id`, `username`, `password`, `firstname`, `lastname`, `email`, `address`, `user_type`) VALUES
+(4, 'jiadong', '$2y$10$4pLaln9poNotdtebf3bw1ObR8CnyalNVcdFeopQQTuNXEbZZuzRlW', 'jiadong', 'chen', 'jiadong.chen1@student.kpu.ca', NULL, 'customer'),
+(5, 'admin', '$2y$10$Hj3v9nciBpb5BRiLuX886O6Vokx0Fdw663XjIHQN50pt6K5SjVZ2a', 'admin', 'admin', 'admin@megamunch.com', NULL, 'admin');
 
 --
 -- Indexes for dumped tables
@@ -288,19 +372,19 @@ ALTER TABLE `User`
 -- AUTO_INCREMENT for table `Order`
 --
 ALTER TABLE `Order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `OrderEntry`
 --
 ALTER TABLE `OrderEntry`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `User`
 --
 ALTER TABLE `User`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
