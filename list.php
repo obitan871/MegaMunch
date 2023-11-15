@@ -1,8 +1,16 @@
 <?php
   require_once "dbconfig.php";
 
-  $search = $_GET["search"];
-  $cid = $_GET["id"];
+  $search = "";
+  $cid = "";
+
+  if(isset($_GET["search"])){
+    $search = $_GET["search"];
+  }
+
+  if(isset($_GET["id"])){
+    $cid = $_GET["id"];
+  }
 
   $sql = "";
   if ((int)$cid < 2000) {
