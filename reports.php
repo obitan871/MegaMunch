@@ -5,6 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <link rel="icon" href="img/icon.png">
+
   <title>Welcome to MegaMunch</title>
   <link href="css/breadcrums.css" rel="stylesheet" type="text/css">
 
@@ -25,7 +27,7 @@
         
          <p>&nbsp;</p>
          
-         <div class="titel"><h1>Reports</h1></div>
+         <div class="titel"><h1 style="text-align: center">Reports</h1></div>
                 
          <div class="table-section"> 
              
@@ -66,7 +68,7 @@
                         $avgquantity = $row["SUM(orderentry.quantity)"];
                         $popularity = $row["COUNT(DISTINCT(user.id))"];
 
-                        $netsales .= "$";
+                        $netsales = "$" . $netsales;
                         $avgquantity /= $totalorders;
                         $popularity /= $totalusers;
 

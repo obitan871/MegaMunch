@@ -2,7 +2,9 @@
   require_once "user.php";
 
   // Initialize the session
-  session_start();
+  if(session_status() == PHP_SESSION_NONE){
+    session_start();
+  }
   
   // If the current user is already logged in, redirect to the home page
   $user = new User;
