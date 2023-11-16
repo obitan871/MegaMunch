@@ -26,19 +26,19 @@
 	 <div class="User-Info">
 		<h1>Frequently Asked Questions</h1>
 		<h2>Question 1: Do you do delivery?</h2>
-		<p><b>Answer: </b> No, we do not do delivery. You can order online and then come pick up the groceries later once they are collected.</p>
+		<p><b>Answer:</b> No, we do not do delivery. You can order online and then come pick up the groceries later once they are collected.</p>
 		<br>
 		<h2>Question 2: Do you sell anything except food products?</h2>
 		<p><b>Answer:</b> We only sell food products.</p>
 		<br>
 		<h2>Question 3: What is your return policy?</h2>
-		<p><b>Answer:<b> You can return products, if you bring a recept, within 30 days of purchase. This includes items that are expired or that you tried and didn't enjoy.</p>
+		<p><b>Answer:</b> You can return products, if you bring a receipt, within 30 days of purchase. This includes items that are expired or that you tried and didn't enjoy.</p>
 		<br>
 		<h2>Question 4: Is this your only location?</h2>
-		<p><b>Answer:</b> Yes this is our only location</p>
+		<p><b>Answer:</b> Yes this is our only location.</p>
 		<br>
-		<h2>Question 5: How does your online ordering work if you don't do delivery?"</h2>
-		<p><b>Answer:</b> You create an online order and then come to the store to pick it up once it's available"</p>
+		<h2>Question 5: How does your online ordering work if you don't do delivery?</h2>
+		<p><b>Answer:</b> You create an online order and then come to the store to pick it up once it's available.</p>
 		<br>
 	 </div>
       <?php include "support.php"; ?>  
